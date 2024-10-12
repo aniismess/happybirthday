@@ -1,0 +1,256 @@
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+  font-family: 'Josefin Slab', serif;
+  height: 100vh;
+  background: black;
+  overflow: hidden;
+}
+
+
+
+
+#container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.background-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.background-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  animation: fadeIn 10s;
+}
+
+
+
+#background1::before { background-image: url(images/5.jpg); }
+#background2::before { background-image: url(images/6.jpg); }
+#background3::before { background-image: url(images/7.jpg); }
+#background4::before { background-image: url(images/1.jpg); }
+
+
+
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-moz-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-o-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-ms-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  .card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 400px;
+    height: 600px;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+.left-side, .right-side, .back-side {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+
+.sides {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+
+.left-side, .right-side {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(rgba(0,0,0, .5),rgba(0, 0 , 0, .7)),
+              url(images/2.jpg) no-repeat center;
+  background-size: cover;
+  transition: transform 2s;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+}
+.left-side {
+  left: 0;
+  transform-origin: left center;
+}
+.right-side {
+  right: 0;
+  transform-origin: right center;
+}
+
+
+
+
+.back-side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0,0,0, .6),rgba(0, 0 , 0, .7)),
+              url(images/3.jpg) center no-repeat;
+  background-size: cover;
+  z-index: -1;
+  transform: translateZ(-300px);
+  transition: z-index .4s step-end, transform 1s;
+  box-shadow: 40px 40px 80px #000;
+}
+
+
+.card:hover .left-side{
+    transform: rotateY(-180deg);
+}
+
+.card:hover .right-side{
+    transform: rotateY(180deg);
+  
+}
+
+.card:hover .back-side{
+    transform: translateZ(0);
+    z-index: 1;
+    box-shadow: 50px 50px 100px #000;
+}
+
+.name {
+    color: #fff;
+    font-size: 20px;
+    margin: 20px 5px;
+}
+
+.profession {
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    margin: 20px 5px;
+    
+}
+
+.left-side .name
+.left-side .profession {
+    text-align: right;
+}
+
+
+.biography {
+  color: rgb(201, 192, 192);
+  font-size: 19px;  /* Increased from 15px */
+  line-height: 1.4;  /* Added for better readability */
+  
+  width: 99%;  /* Increased from 90% */
+  height: 95%;  /* Added to cover more of the card */
+  text-align: center;
+  padding: 15px;  /* Increased from 10px */
+  overflow-y: auto;  /* Added scrollbar if content overflows */
+  box-sizing: border-box; 
+}
+
+button {
+  position: absolute;
+  height: 60px;
+  width: 200px;
+  top: -80px;
+  right: -70px;
+  border: none;
+  outline: none;
+  color: white;
+  background: #111;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+  font-family: 'Raleway', sans-serif;
+  transform: translate(-50%);
+  left: 50%;
+
+}
+
+button:before {
+  position: absolute;
+  content: '';
+  top: -2px;
+  left: -2px;
+  height: calc(100% + 4px);
+  width: calc(100% + 4px);
+  border-radius: 5px;
+  z-index: -1;
+  opacity: 0;
+  filter: blur(5px);
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  background-size: 400%;
+  transition: opacity .3s ease-in-out;
+  animation: animate 20s linear infinite;
+}
+
+button:hover:before { opacity: 1; }
+button:hover:active { background: none; }
+button:hover:active:before { filter: blur(2px); }
+
+
+  @keyframes animate {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+  }
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.spotify-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 5px 0;
+  background-color: #282828;
+  
+}
+
